@@ -9,7 +9,7 @@ class Checklist extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'title'];
+    protected $fillable = ['user_id', 'title', 'date', 'is_completed'];
 
     public function user()
     {

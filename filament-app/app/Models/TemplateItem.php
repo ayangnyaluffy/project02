@@ -15,4 +15,8 @@ class TemplateItem extends Model
     {
         return $this->belongsTo(TemplateChecklist::class, 'template_id');
     }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
