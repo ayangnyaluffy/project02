@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ChecklistResource\Pages;
-use App\Filament\Resources\ChecklistResource\RelationManagers;
-use App\Models\Checklist;
+use App\Filament\Resources\DashboardResource\Pages;
+use App\Filament\Resources\DashboardResource\RelationManagers;
+use App\Models\Dashboard;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,10 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ChecklistResource extends Resource
+class DashboardResource extends Resource
 {
-    protected static ?string $model = Checklist::class;
+    protected static ?string $model = null;
+
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -56,14 +57,9 @@ class ChecklistResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListChecklists::route('/'),
-            'create' => Pages\CreateChecklist::route('/create'),
-            'edit' => Pages\EditChecklist::route('/{record}/edit'),
+            'index' => Pages\ListDashboards::route('/'),
+            'create' => Pages\CreateDashboard::route('/create'),
+            'edit' => Pages\EditDashboard::route('/{record}/edit'),
         ];
-    }
-
-    public static function shouldRegisterNavigation(): bool
-    {
-        return false;
     }
 }

@@ -21,6 +21,8 @@ class ItemResource extends Resource
     protected static ?string $navigationGroup = 'Checklist Management';
     protected static ?int $navigationSort = 2;
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static bool $shouldRegisterNavigation = false;
+
 
     public static function form(Form $form): Form
     {

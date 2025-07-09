@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'mahasiswa' => [ // Tambahkan ini
+            'driver' => 'session',
+            'provider' => 'mahasiswas',
+        ],
     ],
 
     /*
@@ -63,6 +68,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
+        ],
+
+        'mahasiswas' => [ // ✅ Tambahkan ini
+            'driver' => 'eloquent',
+            'model' => App\Models\Mahasiswa::class,
         ],
 
         // 'users' => [
@@ -97,6 +107,8 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+
+
     ],
 
     /*

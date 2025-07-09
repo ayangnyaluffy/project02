@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Models\Mahasiswa;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -17,32 +18,27 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use App\Filament\Widgets\MahasiswaChart;
 
-class AdminPanelProvider extends PanelProvider
+class MahasiswaPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
-            ->id('admin')
-            ->path('admin')
-            ->login()
+            ->id('mahasiswa')
+            ->path('mahasiswa')
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->discoverResources(in: app_path('Filament/Mahasiswa/Resources'), for: 'App\\Filament\\Mahasiswa\\Resources')
+            ->discoverPages(in: app_path('Filament/Mahasiswa/Pages'), for: 'App\\Filament\\Mahasiswa\\Pages')
             ->pages([
-                Pages\Dashboard::class,
+                \App\Filament\Mahasiswa\Pages\Dashboard::class,
+                \App\Filament\Mahasiswa\Pages\ChecklistSaya::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Mahasiswa/Widgets'), for: 'App\\Filament\\Mahasiswa\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
-                MahasiswaChart::class,
-                \App\Filament\Resources\DashboardResource\Widgets\MahasiswaStats::class,
-
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -57,6 +53,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->authGuard('mahasiswa')
+            ->login();
     }
 }
